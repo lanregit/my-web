@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>
+        {% block title %}
+        login
+        {% endblock %}
+    </title>
+    <link rel="icon" type="image/png" sizes="32x30" href="{% static 'blog/img/brand/favicon.png' %}">
+    <link href="{% static 'blog/css/bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'blog/css/font-awesome.min.css' %}" rel="stylesheet">
+    <!-- <link href="{% static 'backend/css/custom-fonts.css' %}" rel="stylesheet"> -->
+    <link href="{% static 'blog/css/blog.css' %}" rel="stylesheet">
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body id="admin">
+    <div class="container-fluid bg-dark">
+      <div class="row">
+        <div class="col-sm-4" id="top-sidebar">
+          <a href="{% url 'home' %}">
+            <img src="{% static 'blog/images/mmmm.png' %}" width="40%" height="60%" alt="logo" class="img-fluid" class="img-responsive">
+          </a>
+        </div>
+        <div class="col-sm-4">
+            <p class="text-center"> <span id="welcome"> Welcome: </span>  Guest </p>
+        </div>
+        <div class="col-sm-4 text-right" id="top-content">
+          <div class="status pull-right">
+            <img src="{%  static 'blog/images/person_1.jpg' %}" width="20%" height="20%" alt="" class="rounded-circle img-fluid img-responsive">
+            <div class="userStatus">
+              <a class="userStatus dropdown-toggle" data-toggle="dropdown" id="userStatus">
+                  muyibaba
+                   <span class="caret"></span>
+              </a>
+              <ul class="dropdown-menu">
+                  <a href="#" class="dropdown-item">my profile</a>
+                  <a href="#" class="dropdown-item">edit profile</a>
+                  <a href="#" class="dropdown-item">change password</a>
+                  <a href="#" class="dropdown-item">logout</a>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+    </div>
+    
+</div>
+{% block content %}
+{% endblock %}
+
+
+
+   
+
+
+
+
+    
+    <script src="{% static 'blog/js/jquery.js' %}"></script>
+    <script src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+  </body>
+</html>

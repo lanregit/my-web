@@ -1,0 +1,96 @@
+{% extends 'blog/base2.html' %}
+<!DOCTYPE html>
+{% load static %}
+
+<body>
+	<!-- this is the header -->
+		
+	{% block content %}
+	<section class="section1">
+		<div class="container-fluid set">
+			<div class="container">
+				<div class="row">
+					{% if cate %}
+					{% for c in cate %}
+					<div class="col-sm-3 text-center mt-8">
+						<a href="#"><span class="text-primary"> {{ c.category }} </span> </a>
+						<p class="text-white"> {{ c.cat_des}} </p>
+					</div>
+					{% endfor %}
+					{% endif %}
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- blog's section shortcut ends here -->
+
+	<!-- blog's content starts here -->
+	<section class="section2">
+		<div class="container-fluid py-2">
+			<div class="container">
+				<p><a href="{% url 'blog:post' %}">Create Post</a></p>
+				<div class="row">
+					<div class="col-sm-8">
+						{% if post %}
+						{% for b in post %}
+						<div class="row news story">
+							<div class="col-sm-4">
+								<img src="{{ b.img.url }}" class="img-fluid">
+							</div>
+							<div class="col-sm-8">
+								<p>Posted by: <a href="#" class="text-primary"> {{ b.poster }} </a>  &nbsp; &nbsp; {% for cat in b.cat.all %} {{ cat }} {% endfor %}</p>
+								<h4> {{ b.title }} </h4>
+								<P>{{ b.content|truncatewords:20 }} </P>
+								<a href="{% url 'blog:login_read_post' b.id %}" class="btn btn-medium btn-primary"> Read more </a>
+							</div>
+							
+						</div>
+						<br>
+						{% endfor %}
+						{% endif %}
+					</div>
+
+
+					<!-- sidebar starts here -->
+					<div class="col-sm-4 news">
+						<p>POPULAR POST</p>
+						<hr>
+						<div class="row trending mx-2 p-2">
+							<div class="col-sm-4">
+								<img src="{% static 'blog/images/hero_3.jpg' %}" class="img-fluid">
+							</div>
+							<div class="col-sm-8">
+								<a href="#">HANGING OUT WITH OLD FRIENDS</a>
+							</div>
+						</div>
+						
+						<div class="col-sm-4 pt-3">
+							Sections	
+							<ul id="section-list">
+								<li> <a href="#" id="list"> Politics </a> </li> <hr>
+								<li> <a href="#" id="list"> Entertainment </a> </li> <hr>
+								<li> <a href="#" id="list"> Agriculture </a> </li> <hr>
+								<li> <a href="#" id="list"> Technology </a> </li> <hr>
+								<li> <a href="#" id="list"> Food </a> </li> <hr>
+							</ul>
+						</div>					
+					</div>
+					<!-- sidebar ends here -->
+
+				</div>
+				<div class="row page-button">
+					<div class="col-sm-1 offset-3">
+						<button class="btn btn-primary btn-sm">Previous</button>
+					</div>
+					<div class="col-sm-1 offset-3">
+						<button class="btn btn-primary btn-sm">Next</button>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+	{% endblock %}
+
+
+	

@@ -1,0 +1,222 @@
+{% extends 'my_website_app/base.html' %}
+<!DOCTYPE html>
+
+{% load static %}
+
+
+
+    {% block title %}
+      Lanre Web Studio
+    {% endblock %}
+    
+  
+    {% block content %}
+  <div class="site-wrap">
+
+     <!-- .site-mobile-menu -->
+    
+    
+    <!-- END .site-navbar-wrap -->
+
+
+
+      <!-- START: Carousel starts here -->
+    
+    <div class="site-blocks-cover" id="home-section">
+      <div class="img-wrap">
+        <div class="owl-carousel slide-one-item hero-slider">
+          <div class="slide overlay">
+            <img src="{% static 'my_website_app/images/bg.png' %}" alt="Image" class="img-fluid">  
+          </div>
+          <div class="slide overlay">
+            <img src="{% static 'my_website_app/images/hero_2.jpg' %}" alt="Image" class="img-fluid">  
+          </div>
+          <div class="slide overlay">
+            <img src="{% static 'my_website_app/images/hero_3.jpg' %}" alt="Image" class="img-fluid">  
+          </div>
+        </div>
+      </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 align-self-center">
+            <div class="intro">
+              <div class="heading">
+                <h1 class="text-primary" id="name">Lanre Web Studio</h1>
+              </div>
+              <div class="text">
+                <p class="sub-text mb-5 slide" id="named">We are a web studio helping start-ups, small businesses, and agencies achieve high quality website with exceptional user experience. We are based in Lagos, Nigeria.
+                <br><a href="#contact-section" target="_blank" class="btn btn-primary btn-md">Start a project</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- END .site-blocks-cover -->
+
+      <!-- END. corousel ends here  -->
+    
+
+      <!-- ABOUT US STARTS HERE -->
+
+    <div class="site-section" id="about-section">
+      <div class="container">
+        <div class="row align-items-center">
+          {% if about %}
+          {% for ab in about %}
+          <div class="col-sm-6 mb-5" id="abt1">
+            <img src="{{ ab.abt_img.url }}" alt="Image" class="img-fluid">
+            <p class="d-flex align-items-center text-center">
+              <a href="https://web.facebook.com/muyideenk" class="pr-2" target="_blank"><span class="icon-facebook"></span></a>
+              <a href="https://twitter.com/Olanrewaju_mk" class="pr-2 pt-2 pb-2 pl-0" target="_blank"><span class="icon-twitter"></span></a>
+              <a href="#" class="github p-2"><span class="icon-github"></span></a>
+              <a href="#" class="instagram p-2"><span class="icon-instagram"></span></a>
+              <a href="#" class="linkedin p-2"><span class="icon-linkedin"></span></a>
+            </p>
+          </div>
+          <div class="col-lg-5 ml-auto section-title" id="abt2">
+            <span class="sub-title mb-2 d-block">About Me</span>
+            <h2 class="title text-primary mb-3">I'm An Expert In Web</h2>
+            <p class="mb-4">
+              {{ ab.abt_content }} <br> 
+              <a href="{% url 'my_web_app:about_me' %}" class="readmore">Read more</a> 
+            </p>
+            {% endfor %}
+            {% endif %}
+
+            <h5 class="text-primary">The Tools and Language I Speak</h5>
+            <div class="d-flex" id="sphere">
+              <ul class="list-unstyled ul-check success mr-5">
+                {% if lang %}
+                {% for l in lang %}
+                <li> {{ l.l_icon.as_html }} {{ l.lan }}</li>
+                {% endfor %}
+                {% endif %}
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+        <!-- ABOUT US ENDS HERE -->
+
+       <!-- WHAT DO WE DO STARTS HERE -->
+
+    <div class="site-section bg-light" id="what-we-do-section">
+      <div class="container">
+        <div class="row mb-5">
+          <div class="col-lg-6 section-title">
+            <span class="sub-title mb-2 d-block">What We Do</span>
+            <h2 class="title text-primary">Our Services include but not limited to the following</h2>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-sm-12 ml-auto">
+            <div class="row">
+              {% if s_key %}
+              {% for a in s_key%}
+              <div class="col-sm-4 mb-4">
+                <div class="service h-100">
+                  
+                  <span class="display-4 text-primary text-center d-block mb-4">{{ a.icon.as_html }}</span>
+                  <h3 class="text-center mb-2">{{ a.title }}</h3>
+                  <p class="text-justify"> {{ a.description }}</p>
+                  <p><a href="{% url 'my_web_app:service' a.id %} " class="readmore">Learn more</a></p>
+                </div>
+              </div>
+              {% endfor %}
+              {% endif %}
+              <div class="col-sm-4 mb-4">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- END .site-section -->
+
+    <!-- WHAT WE DO ENDS HERE -->
+    
+
+
+
+    <!-- RECENT WORK STARTS HERE -->
+
+
+    <div class="site-section" id="portfolio-section">
+      <div class="container">
+        <div class="row mb-5 ">
+          <div class="col-md-8 section-title text-center mx-auto">
+            <span class="sub-title mb-2 d-block">Recent Works</span>
+            <h2 class="title text-primary mb-3">Here is a list of some of our recent works </h2>
+          </div>
+        </div>
+        <div class="row mb-5">
+          {% if port %}
+          {% for p in port %}
+          <div class="col-lg-6 mb-4 mb-lg-0">
+            <img src="{{ p.p_image.url }}" alt="img">
+          </div>
+          <div class="col-lg-5 h-100 jm-sticky-top ml-auto">
+            <h3> {{ p.p_title }} </h3>
+            <p class="mb-4"> {{ p.p_describe }} </p>
+            <p class="mb-5"><strong class="text-black">Role:</strong> {{ p.role }}</p>
+            <p class="mb-4"><a class="readmore" href="{{ p.site }}" target="_blank" rel="noopener noreferrer"> Visit website</a></p>
+            <blockquote class="blockquote">
+              <p>Nice Looking Website Of Ours. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam excepturi quod dolore commodi.</p>
+              <p class="mb-0 d-flex align-items-center">
+                <img class="img-fluid mr-3" src="{% static 'my_website_app/images/person_1.jpg' %}" alt="Image">
+                <cite>&mdash; John Doe</cite>
+              </p>
+            </blockquote>
+            <p class="mb-4"><a href="#" class="readmore">Visit website</a></p>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+
+    <!-- RECENT WORK ENDS HERE -->
+
+      <!-- CONTACT US FORM STARTS HERE -->
+    <div class="site-section" id="contact-section">
+      <div class="container">
+        <form action="" class="contact-form" method="POST">
+        
+          {% csrf_token %}
+
+          <div class="section-title text-center mb-5">
+            <span class="sub-title mb-2 d-block">Get In Touch</span>
+            <h2 class="title text-primary">Contact Us</h2>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-12 mb-4 mb-md-0">
+              {{ form.f_name }}
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-12 mb-4 mb-md-0">
+              {{ form.email }}
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-12">
+              {{ form.comment }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-md">Send Message</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div> <!-- END .site-section -->
+    <!-- CONTACT FORM ENDS HERE -->
+  
+   
+
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'my_website_app/base.html' %}
+<!DOCTYPE html>
+{% load static %}
+
+
+{% block title %}
+Olanrewaju
+{% endblock %}
+
+    {% block content %}
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="pagetitle">
+                    <h1> About Me </h1>
+                </div>
+            </div>
+        </div>
+        {% if about_m %}
+        {% for b in about_m %}
+        <div class="row">
+            <div class="col-sm-12">
+                <div class="ser_title text-center mb-4">
+                    <img src="{{ b.abt_img.url }}" alt="" class="img-fluid" height="400px" width="400px">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-12">
+                <P>
+                   {{ b.abt_detail }}
+                </P>
+            </div>
+        </div>
+        {% endfor %}
+        {% endif %}
+    </div>
+    {% endblock %}

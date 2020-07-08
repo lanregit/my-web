@@ -1,0 +1,29 @@
+<!-- the initial nav-wrap i used in my website -->
+
+
+<div class="site-navbar-wrap">
+      
+      <div class="site-navbar site-navbar-target js-sticky-header bg-dark static-top">
+        <div class="container">
+          <div class="row align-items-center">
+            <div class="col-sm-4">
+             <a href="#home-section"><img src="{% static 'my_website_app/images/mmmm.png' %}" alt="our logo" class="my-0 site-logo" width="50%" height="60%"></a>
+            </div>
+            <div class="col-sm-8">
+              <nav class="site-navigation text-right" role="navigation">
+                <!-- <div class="container"> -->
+                  <ul class="site-menu main-menu">
+                    <li><a href="{% url 'home' %}" class="nav-link text-primary" data-toggle="tab">Home</a></li>
+                    <li><a href="#about-section" class="nav-link text-primary" data-toggle="tab">About</a></li>
+                    <li><a href="#what-we-do-section" class="nav-link text-primary" data-toggle="tab">What We Do</a></li>
+                    <li><a href="#portfolio-section" class="nav-link text-primary" data-toggle="tab">Portfolio</a></li>
+                    <li><a href="{% url 'blog:blog2' %}" class="nav-link text-primary" data-toggle="tab">Blog</a></li>
+                    <li><a href="#contact-section" class="nav-link text-primary" data-toggle="tab">Contact</a></li>
+                  </ul>
+                <!-- </div> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>

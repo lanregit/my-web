@@ -1,0 +1,83 @@
+<!-- {% load static %} -->
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+    <style>
+      .body{
+        background-color: rgb(43, 144, 226);
+      }
+      .profile{
+        width: 500px;
+        height: 600px;
+        border-radius: 20px;
+        background-color: white;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        margin-left: auto;
+        margin-right: auto;
+        padding: 100px 50px;
+      }
+      .profile_box{
+        margin-top: 100px;
+        text-align: center;
+      }
+
+    </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}">
+    <link href="{% static 'blog/img/brand/favicon.png' %}" rel="icon" type="image/png">
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+    <!-- Icons -->
+    <link href="{% static 'blog/js/plugins/nucleo/css/nucleo.css' %}" rel="stylesheet" />
+    <link href="{% static 'blog/js/plugins/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
+    <!-- CSS Files -->
+    <link href="{% static 'blog/css/argon-dashboard.css' %}" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}">
+  
+  </head>
+  <body class="body">
+
+      <div class="container-fluid">
+        <div class="login-logo">
+          <a href="{% url 'home' %}" class="navbar-brand"><img src="{% static 'blog/images/mmmm.png' %}" width="30%" height="50%" alt="logo"> </a>
+        </div>
+      </div>
+        <div class="profile">
+          <div class="row">
+            <div class="col-sm-12">
+              <h2 class="text-success"> Thank you, account successfully created </h2>
+            </div>
+          </div>
+          <div class="profile_box">
+            <div class="mb-3">
+              <p>click <a href="{% url 'blog:edit_profile' %}"> here </a> to complete your profile registration</p>
+            </div>
+            
+            
+            <a href="{% url 'blog:log_in' %}">Remind me later </a>
+          </div>
+        </div>
+        
+      
+   
+
+
+
+   
+
+
+
+
+    
+   		<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" src="{% static 'blog/js/jquery-3.3.1.slim.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/js/popper.min.js' %}"></script>
+</body>
+</html>

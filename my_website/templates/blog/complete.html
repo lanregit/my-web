@@ -1,0 +1,34 @@
+{% extends 'blog/base2.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+{% block title %}
+Blog
+{% endblock %}
+
+	<!-- header ends here -->
+
+	<!-- blog's section shortcut starts here -->
+
+	{% block content %}
+	
+
+	<!-- blog's content starts here -->
+	<section class="section2">
+		<div class="container-fluid py-2">
+			<div class="container">
+				<!-- {% if user.is_authenticated %} -->
+                <form method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ com }}
+                    <input type="submit" value="Complete Profile" class="btn btn-primary">
+				</form>
+				<!-- {% endif %} -->
+			</div>
+		</div>
+	</section>
+	{% endblock %}
+	<!-- blog's content ends here -->
+
+	

@@ -1,0 +1,115 @@
+{% extends 'blog/base2.html' %}
+<!DOCTYPE html>
+{% load static %}
+<html>
+
+{% block title %}
+Blog
+{% endblock %}
+
+	<!-- header ends here -->
+
+	<!-- blog's section shortcut starts here -->
+
+	{% block content %}
+	
+
+	<!-- blog's content starts here -->
+	<section class="section2">
+		<div class="container-fluid py-2">
+			<div class="container">
+				<div class="row">
+					<div class="col-sm-8">
+						{% if post %}
+						
+						<div class="row news story">
+							<div class="col-sm-12 text-center">
+								<img src="{{ post.img.url }}" class="img-fluid">
+								<br>
+							   	<i> {% for cat in post.cat.all %} {{ cat }} {% endfor %} &nbsp; &nbsp; <small>  {{ post.title }} </small> </i>
+							</div>
+                        </div>
+                        <div class="row news story">
+							<div class="col-sm-12">
+								<h1> {{ post.title }} </h1>
+								<p class="mb-4"> <a href="#" class="text-light bg-primary"> {{ post.poster }} </a> &nbsp; &nbsp; <span class="bg-primary text-light"> {{ post.time }} </span> </p>
+								<P class="text-justify">{{ post.content }} </P>	
+							</div>
+						</div>
+						{% endif %}
+						<div class="row">
+							<div class="col-sm-12">
+								<h2 class="text-primary pt-3"> {{ comment.count }} Comment{{ comment|pluralize }}</h2>
+							</div>
+						</div>
+						
+						{% for c in comment %}
+						<!-- <div class="bg-white"> -->
+						<div class="row story news comment">
+							<div class="col-sm-6">
+								<p>by: <a href="#">{{ c.comment_by }} </a></p>
+							</div>
+							<div class="col-sm-6 text-right">
+								<p><small> {{ c.comment_time|timesince }} </small></p>
+							</div><hr>
+							<p class="pb-2">{{ c.comment }}</p>
+						</div><br>
+						<!-- </div> -->
+						{% endfor  %}
+						
+						<!-- <div class="text-center mt-5">
+							<a href="{% url 'blog:comment' %}" class="btn btn-primary"> Comment </a>
+						</div> -->
+						
+						<form action="" method="POST">
+							{% csrf_token %}
+
+							{% if comment_form.errors %}
+								{% for c in comment_form.errors %}
+									{{ c}}
+
+								{% endfor %}
+							{% endif %}
+							{{ comment_form.comment }} <br>
+							<input type="submit" value="comment" class="text-center btn btn-success btn-small">
+						</form>
+
+					</div>
+					
+
+
+					<!-- sidebar starts here -->
+					<div class="col-sm-4 news">
+						<p>POPULAR POST</p>
+						<hr>
+						<div class="row trending mx-2 p-2">
+							<div class="col-sm-4">
+								<img src="{% static 'blog/images/hero_3.jpg' %}" class="img-fluid">
+							</div>
+							<div class="col-sm-8">
+								<a href="#">HANGING OUT WITH OLD FRIENDS</a>
+							</div>
+						</div>
+						
+						<div class="col-sm-4 pt-3">
+							Sections	
+							<ul id="section-list">
+								<li> <a href="#" id="list"> Politics </a> </li> <hr>
+								<li> <a href="#" id="list"> Entertainment </a> </li> <hr>
+								<li> <a href="#" id="list"> Agriculture </a> </li> <hr>
+								<li> <a href="#" id="list"> Technology </a> </li> <hr>
+								<li> <a href="#" id="list"> Food </a> </li> <hr>
+							</ul>
+						</div>					
+					</div>
+					<!-- sidebar ends here -->
+
+				</div>
+				
+			</div>
+		</div>
+	</section>
+	{% endblock %}
+	<!-- blog's content ends here -->
+
+	

@@ -1,0 +1,131 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>
+    {% block title %}
+    
+    {% endblock %}
+  </title>
+  <!-- Favicon -->
+  <link href="{% static 'blog/img/brand/favicon.png' %}" rel="icon" type="image/png">
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  <link href="{% static 'blog/js/plugins/nucleo/css/nucleo.css' %}" rel="stylesheet" />
+  <link href="{% static 'blog/js/plugins/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
+  <!-- CSS Files -->
+  <link href="{% static 'blog/css/argon-dashboard.css' %}" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}">
+
+</head>
+
+<body>
+  
+  <div class="mb-0">
+    <!-- Navbar -->
+    <nav class="navbar bg-primary navbar-top navbar-expand-md navbar-dark" id="navbar-main">
+      <div class="container-fluid">
+        <!-- Brand -->
+        <a class="" href="{% url 'home' %}">
+          <img src="{% static 'blog/images/mmmm.png' %}" width="40%" height="40%" alt="logo" class="img-fluid" class="img-responsive">
+        </a>
+        <!-- Form -->
+        <form class="navbar-search navbar-search-dark form-inline mr-3 d-none d-md-flex ml-lg-auto">
+          <div class="form-group mb-0">
+            <div class="input-group input-group-alternative">
+              <div class="input-group-prepend">
+                <span class="input-group-text"><i class="fas fa-search"></i></span>
+              </div>
+              <input class="form-control" placeholder="Search" type="text">
+            </div>
+          </div>
+        </form>
+        <!-- User -->
+        <ul class="navbar-nav align-items-center d-none d-md-flex">
+          <li class="nav-item dropdown">
+            <a class="nav-link pr-0" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <div class="media align-items-center">
+                <span class="avatar avatar-sm rounded-circle">
+                  <img alt="Image placeholder" src="{{ user.completeprofile.profile_pic.url }}">
+                </span>
+                <div class="media-body ml-2 d-none d-lg-block">
+                  <span class="mb-0 text-sm  font-weight-bold"></span>
+                  <span class="caret"></span>
+                  {{ user.username }}
+                </div>
+              </div>
+            </a>
+            <div class="dropdown-menu dropdown-menu-arrow dropdown-menu-right">
+              <div class=" dropdown-header noti-title">
+                <h6 class="text-overflow m-0">Welcome!</h6>
+              </div>
+              <a href="{% url 'blog:profile' %}" class="dropdown-item">
+                <i class="ni ni-single-02"></i>
+                <span>My profile</span>
+              </a>
+              <a href="{% url 'blog:c_profile' %}" class="dropdown-item">
+                <i class="ni ni-settings-gear-65"></i>
+                <span>Settings</span>
+              </a>
+              <a href="./examples/profile.html" class="dropdown-item">
+                <i class="ni ni-calendar-grid-58"></i>
+                <span>Activity</span>
+              </a>
+              <a href="./examples/profile.html" class="dropdown-item">
+                <i class="ni ni-support-16"></i>
+                <span>Support</span>
+              </a>
+              <div class="dropdown-divider"></div>
+              <a href="{% url 'blog:logout' %}" class="dropdown-item">
+                <i class="ni ni-user-run"></i>
+                <span>Logout</span>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </div>
+  {% block content %}
+
+  {% endblock %}
+
+ 
+  <footer class="bg- login_footer">
+    <p class="text-center"> <a href="#top">TOP</a></p>
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-sm-6">  
+          <p><span> &copy; 2020 <a href="#">LanreBlog</a> </span> Designed by <a href="{% url 'home' %}"> Lanre web</a></p>
+        </div>
+        <div class="col-sm-6">
+          <ul class="nav">
+            <li class="nav-item"> <a href="{% url 'home' %}" class="nav-link">Home</a> </li>
+            <li class="nav-item"> <a href="#" class="nav-link">Politics </a> </li>
+            <li class="nav-item"> <a href="#" class="nav-link">Sport</a> </li>
+            <li class="nav-item"> <a href="#" class="nav-link">Entertainment</a> </li>
+            <li class="nav-item"> <a href="#" class="nav-link">Technology</a> </li>
+            <li class="nav-item"> <a href="#" class="nav-link">Food</a> </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!--   Core   -->
+  <script src="{% static 'blog/js/plugins/jquery/dist/jquery.min.js' %}"></script>
+  <script src="{% static 'blog/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js' %}"></script>
+  <!--   Optional JS   -->
+  <script src="{% static 'blog/js/plugins/chart.js/dist/Chart.min.js' %}"></script>
+  <script src="{% static 'blog/js/plugins/chart.js/dist/Chart.extension.js' %}"></script>
+  <!--   Argon JS   -->
+  <script src="{% static 'blog/js/argon-dashboard.min.js' %}"></script>
+  <script src="https://cdn.trackjs.com/agent/v3/latest/t.js"></script>
+ 
+</body>
+
+</html>

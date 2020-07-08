@@ -1,0 +1,59 @@
+{% extends 'my_website_app/base.html' %}
+<!DOCTYPE html>
+
+{% load static %}
+
+
+
+    {% block title %}
+      Contact2
+    {% endblock %}
+    
+  
+    {% block content %}
+
+
+      <!-- CONTACT US FORM STARTS HERE -->
+    <div class="site-section" id="contact-section">
+      <div class="container">
+        <form action="" class="contact-form" method="POST">
+        
+          {% csrf_token%}
+
+          <div class="section-title text-center mb-5">
+            <span class="sub-title mb-2 d-block">Get In Touch</span>
+            <h2 class="title text-primary">Contact Us</h2>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-12 mb-4 mb-md-0">
+              {{ form1.f_name }}
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-md-12 mb-4 mb-md-0">
+              {{ form1.email }}
+            </div>
+          </div>
+
+          <div class="row mb-4">
+            <div class="col-12">
+              {{ form1.comment }}
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-12">
+              <button type="submit" class="btn btn-primary btn-md">Send Message</button>
+            </div>
+          </div>
+
+        </form>
+      </div>
+    </div> <!-- END .site-section -->
+    <!-- CONTACT FORM ENDS HERE -->
+  
+   
+
+{% endblock %}

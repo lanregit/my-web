@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<meta charset="utf-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}">
+	<!-- <link href="{% static 'blog/img/brand/favicon.png' %}" rel="icon" type="image/png"> -->
+  <!-- Fonts -->
+  	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <!-- Icons -->
+  	<link href="{% static 'blog/js/plugins/nucleo/css/nucleo.css' %}" rel="stylesheet" />
+  	<link href="{% static 'blog/js/plugins/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
+  <!-- CSS Files -->
+  	<link href="{% static 'blog/css/argon-dashboard.css' %}" rel="stylesheet" />
+	<title>
+        {% block title %}
+        
+        {% endblock %}
+	</title>
+</head>
+<body>
+	<!-- this is the header -->
+	<div class="container-fluid bg-secondary py-3">
+			<div class="row bg-secondary">
+				<div class="col-sm-3">
+					<a href="{% url 'home' %}"><img src="{% static 'blog/images/mmmm.png' %}" width="50%" height="100%" alt="logo"> </a>
+				</div>
+				<div class="col-sm-9 text-right" id="top-content">
+                    <div class="status pull-right">
+                        <img src="" alt="" class="img-circle">
+                        <div class="userStatus">
+                            <a class="userStatus dropdown-toggle" data-toggle="dropdown" id="userStatus">
+                                
+                                 <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Log Out</a></li>
+                                <li><a href="#">My Profile</a></li>
+                                <li><a href="#">Change Password</a></li>
+                                <li><a href="#">Edit Profile</a></li>
+                            </ul>
+                        </div>
+                    </div>
+				</div>
+			</div>
+		</div>	
+	</div>
+    <!-- header ends here -->
+    {% block content %}
+
+    <!-- <div class="col-sm-9" id="top-content">
+        <div class="status pull-right">
+          <img src="{% static 'backend/images/user.jpg' %}" class="img-circle">
+          <div class="userStatus">
+            <a class="userStatus dropdown-toggle" data-toggle="dropdown" id="userStatus">
+                {{ user.first_name }}
+                 <span class="caret"></span>
+            </a>
+            <ul class="dropdown-menu">
+             <li><a href="{% url 'backend:logout' %}">Log Out</a></li>
+             <li><a href="{% url 'backend:my_profile' %}">My Profile</a></li>
+             <li><a href="{% url 'backend:pass_form' %}">Change Password</a></li>
+             <li><a href="{% url 'backend:edit_form' %}">Edit Profile</a></li>
+            </ul>
+          </div>
+        </div>
+      </div> -->
+    
+    {% endblock %}
+
+	<!-- blog's section shortcut starts here -->
+
+	
+        <!-- footer starts here -->
+	<footer class="bg-secondary">
+		<p class="text-center"> <a href="#top">TOP</a></p>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-sm-6">	
+					<p><span> &copy; 2020 <a href="#">LanreBlog</a> </span> Designed by <a href="{% url 'home' %}"> Lanre web</a></p>
+				</div>
+				<div class="col-sm-6">
+					<ul class="nav">
+						<li class="nav-item"> <a href="{% url 'home' %}" class="nav-link">Home</a> </li>
+						<li class="nav-item"> <a href="#" class="nav-link">Politics </a> </li>
+						<li class="nav-item"> <a href="#" class="nav-link">Sport</a> </li>
+						<li class="nav-item"> <a href="#" class="nav-link">Entertainment</a> </li>
+						<li class="nav-item"> <a href="#" class="nav-link">Technology</a> </li>
+						<li class="nav-item"> <a href="#" class="nav-link">Food</a> </li>
+					</ul>
+				</div>
+			</div>
+		</div>
+    </footer>
+    
+    <!-- footer ends here -->
+
+
+
+		<!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script type="text/javascript" src="{% static 'blog/js/jquery-3.3.1.slim.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/js/popper.min.js' %}"></script>
+</body>
+</html>
