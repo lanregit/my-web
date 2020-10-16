@@ -1,0 +1,8 @@
+<div class="col-sm-4 pt-3">
+    <h3>Sections</h3>
+    {% for cat in cate %}	
+    <ul id="section-list">
+        <li> <a href="{% url 'blog:category' cat %}" id="list">{{ cat }} </a> </li> <hr>
+    </ul>
+    {% endfor %}
+</div>

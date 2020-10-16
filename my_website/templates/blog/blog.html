@@ -12,22 +12,7 @@ Blog
 	<!-- blog's section shortcut starts here -->
 
 	{% block content %}
-	<section class="section1">
-		<div class="container-fluid set">
-			<div class="container">
-				<div class="row">
-					{% if cate %}
-					{% for c in cate %}
-					<div class="col-sm-3 text-center mt-8">
-						<a href="#"><span class="text-primary"> {{ c.category }} </span> </a>
-						<p class="text-white"> {{ c.cat_des}} </p>
-					</div>
-					{% endfor %}
-					{% endif %}
-				</div>
-			</div>
-		</div>
-	</section>
+	{% include 'blog/homehead.html' %}
 	<!-- blog's section shortcut ends here -->
 
 	<!-- blog's content starts here -->
@@ -38,19 +23,23 @@ Blog
 					<div class="col-sm-8">
 						{% if post %}
 						{% for b in post %}
+						{% if b.approval == True %}
 						<div class="row news story">
 							<div class="col-sm-4">
 								<img src="{{ b.img.url }}" class="img-fluid">
 							</div>
 							<div class="col-sm-8">
-								<p>Posted by: <a href="#" class="text-primary"> {{ b.poster }} </a>  &nbsp; &nbsp; {{ b.cat }}</p>
+								<p>Posted by: <a href="{% url 'blog:userprofile' b.poster.username %}" class="text-primary"> {{ b.poster }} </a>  &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+									{% for cat in b.cat.all %} <a href="{% url 'blog:category' cat %}"> {{ cat }} </a> {% endfor %}
+								</p>
 								<h4> {{ b.title }} </h4>
 								<P>{{ b.content|truncatewords:20 }} </P>
-								<a href="{% url 'blog:read_post' b.id %}" class="btn btn-medium btn-primary"> Read more </a>
+								<a href="{% url 'blog:login_read_post' b.id %}" class="btn btn-medium btn-primary"> Read more </a>
 							</div>
 							
 						</div>
 						<br>
+						{% endif %}
 						{% endfor %}
 						{% endif %}
 					</div>
@@ -69,16 +58,7 @@ Blog
 							</div>
 						</div>
 						
-						<div class="col-sm-4 pt-3">
-							Sections	
-							<ul id="section-list">
-								<li> <a href="{% url 'blog:politics' %}" id="list"> Politics </a> </li> <hr>
-								<li> <a href="#" id="list"> Entertainment </a> </li> <hr>
-								<li> <a href="#" id="list"> Agriculture </a> </li> <hr>
-								<li> <a href="#" id="list"> Technology </a> </li> <hr>
-								<li> <a href="#" id="list"> Food </a> </li> <hr>
-							</ul>
-						</div>					
+						{% include 'blog/sidebar.html' %}					
 					</div>
 					<!-- sidebar ends here -->
 

@@ -3,7 +3,7 @@ from django.core import validators
 from django.utils import timezone
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth.models import User
-from blog.models import CompleteProfile, Post, Comments
+from blog.models import CompleteUser_Profile, Post, Comment_user
 
 
 
@@ -43,7 +43,7 @@ class CompleteProfileForm(forms.ModelForm):
             (Male,'male'),
             (Female, 'female')
         ]
-        model = CompleteProfile
+        model = CompleteUser_Profile
         exclude = ('user', 'time')
         widgets = {
             'gender': forms.RadioSelect(choices=Gender),
@@ -94,12 +94,35 @@ class PostForm(forms.ModelForm):
         }
         
     
+class UpdatePostForm(forms.ModelForm):
+    class Meta:
+        model = Post
+        fields = {'title', 'content', 'img', 'cat'}
+        exclude = ('time',)
+        widgets = {
+            'title':forms.TextInput(attrs={'class':'form-control', 'placeholder':'Post Title'}),
+            'content':forms.Textarea(attrs={'class':'form-control', 'placeholder':'Post Content'}),
+            'img':forms.ClearableFileInput()
+        }
+        
+    
 #USERS' COMMENT FORM
 class CommentForm(forms.ModelForm):
     class Meta:
-        model = Comments
-        fields ='__all__'
+        model = Comment_user
+        fields ={'comment',}
+        exclude = ('comment_time',)
         widgets = {
             'comment':forms.Textarea(attrs={'class':'form-control', 'placeholder':' Write Your Comment'})
         }
+
+# USERS' REPLY FORM
+# class ReplyForm(forms.ModelForm):
+#     class Meta:
+#         model = Reply
+#         fields ={'reply',}
+#         exclude = ('reply_time',)
+#         widgets = {
+#             'reply':forms.Textarea(attrs={'class':'form-control', 'placeholder':' Write Your Comment'})
+#         }
 

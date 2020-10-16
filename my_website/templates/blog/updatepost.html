@@ -1,0 +1,43 @@
+{% extends 'blog/base2.html' %}
+{% load static %}
+<!Doctype html>
+{% block title %}
+Create a post
+{% endblock %}
+
+{% block content %}
+<!-- END OF PAGE TITLE -->
+<section id="content" class="text-center">
+  <div class="container">
+  <div class="row">
+    <div class="col-sm-9" id="mainContent">
+      <div class="row">
+        <div class="col-sm-12">
+         <div class="row">
+             <div class="col-sm-12">
+                <h2 class="text-center m-5"> Modify Post </h2>
+                <form method='POST' enctype="multipart/form-data">
+                  <div class="input-group input-group-alternative mb-3">
+                    {{ form.title }}
+                  </div>
+                  <div class="input-group input-group-alternative mb-3">
+                    {{ form.cat }}
+                  </div>
+                  <div class="input-group input-group-alternative mb-3">
+                    {{ form.content }}
+                  </div>
+                  <div class="input-group input-group-alternative mb-3">
+                    {{ form.img }}
+                  </div>
+                    {% csrf_token %}
+                    <input type="submit" class='btn btn-success' value="Update">
+                </form>
+             </div>
+         </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</section>
+{% endblock %}

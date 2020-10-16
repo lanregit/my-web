@@ -637,12 +637,12 @@ pre code {
   margin-left: auto;
 }
 
-.row {
+/* .row {
   display: flex;
   flex-wrap: wrap;
   margin-right: -15px;
   margin-left: -15px;
-}
+} */
 
 .no-gutters {
   margin-right: 0;
@@ -946,10 +946,10 @@ pre code {
     max-width: 41.666667%;
   }
 
-  .col-sm-6 {
+  /* .col-sm-6 {
     flex: 0 0 50%;
     max-width: 50%;
-  }
+  } */
 
   .col-sm-7 {
     flex: 0 0 58.333333%;
@@ -20747,5 +20747,13 @@ footer{
 .comment{
   border: 1px rgb(129, 129, 194) solid;
 }
+
+.reply2{
+  border-right: 1px rgb(129, 129, 194) solid;
+  border-left: 1px rgb(129, 129, 194) solid;
+  background-color: #fff;
+  margin-right: 50px !important;
+}
+
 
 /*# sourceMappingURL=dashboard-free.css.map */

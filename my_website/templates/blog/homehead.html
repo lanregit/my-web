@@ -1,0 +1,16 @@
+<section class="section1">
+    <div class="container-fluid set">
+        <div class="container">
+            <div class="row">
+                {% if cate %}
+                {% for c in cate %}
+                <div class="col-sm-3 text-center mt-8">
+                    <a href="{% url 'blog:category' c %}"><span class="text-primary"> {{ c }} </span> </a>
+                    <p class="text-white"> {{ c.cat_des }} </p>
+                </div>
+                {% endfor %}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</section>

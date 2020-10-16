@@ -10,7 +10,9 @@
     <link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}">
 	<link href="{% static 'blog/img/brand/favicon.png' %}" rel="icon" type="image/png">
 	<!-- Fonts -->
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'blog/fonts/icomoon/style.css' %}">
+  
 	<!-- Icons -->
 	<link href="{% static 'blog/js/plugins/nucleo/css/nucleo.css' %}" rel="stylesheet" />
 	<link href="{% static 'blog/js/plugins/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
@@ -25,8 +27,8 @@
 </head>
 <body>
 	<!-- this is the header -->
-	<div class="container-fluid bg-dark py-3 mb-3">
-			<div class="row mb-3">
+	<div class="container-fluid bg-dark sticky-top">
+			<div class="row">
 				<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
           <!-- LOGO -->
           <div class="col-sm-4">
@@ -54,7 +56,7 @@
             <div class="status pull-right">
               <div class="userStatus">
                 <a class="userStatus dropdown-toggle nav-link" data-toggle="dropdown" id="userStatus">
-                  <img src="{{ user.completeprofile.profile_pic.url }}" class="rounded-circle">
+                  <img src="{{ user.completeuser_profile.profile_pic.url }}" class="rounded-circle">
                   {{ user.username }}
                   <!-- <span class="caret"></span> -->
                 </a>
@@ -135,6 +137,18 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script type="text/javascript" src="{% static 'blog/js/jquery-3.3.1.slim.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'blog/js/popper.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'blog/js/jquery.js' %}"></script>
     <script type="text/javascript" src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+    <script type="text/javascript">
+      $(function(){
+	
+        $('.reply-btn').click(function(){
+            $('.reply').fadeToggle();
+          })
+
+        
+
+      })
+    </script>
 </body>
 </html>

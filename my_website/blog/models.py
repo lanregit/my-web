@@ -23,17 +23,21 @@ class Post(models.Model):
     img = models.ImageField(verbose_name='picture', upload_to= 'images', blank=True, null=True)
     content = models.TextField(verbose_name='Post',)
     poster = models.ForeignKey(User, verbose_name='Post By', on_delete=models.CASCADE, default=User)
+    likes = models.ManyToManyField(User, related_name='Likes', blank=True)
     time = models.DateTimeField(auto_now_add=True)
+    approval = models.BooleanField(verbose_name='Approve Post', default=False)
 
     def __str__(self):
         return self.title
 
+    def total_likes(self):
+        return self.likes.count
 
 # model for CompleteProfile
-class CompleteProfile(models.Model):
+class CompleteUser_Profile(models.Model):
 
-    Male = 'ml' 
-    Female = 'fl'
+    Male = 'ML' 
+    Female = 'FM'
     Gender = [
         (Male, 'male'),
         (Female, 'female')
@@ -52,24 +56,18 @@ class CompleteProfile(models.Model):
 
 
 # model for comment
-class Comments(models.Model):
+class Comment_user(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE, related_name='comments')
     comment_by= models.ForeignKey(User, on_delete=models.CASCADE)
     comment_time = models.DateTimeField(auto_now_add=True)
-    comment = models.TextField(verbose_name="Users'_Comment")
+    comment = models.TextField(verbose_name="Users' Comment")
+    reply = models.ForeignKey('Comment_user', null=True, related_name='replies', on_delete=models.CASCADE)
+    likes = models.ManyToManyField(User, related_name='comment_likes', blank=True)
 
     def __str__(self):
         return self.comment
 
-# class Comment(models.Model):
-    
-
-# @receiver(post_save, sender=User)
-# def update_user_CompleteProfile(sender, instance, created, **kwargs):
-#     if created:
-#         CompleteProfile.object.create(user=instance)
+    def count_like(self):
+        return self.likes.count
 
 
-# @receiver(post_save, sender=User)
-# def save_user_CompleteProfile(sender, instance, **kwargs):
-#     instance.profile.save()          
