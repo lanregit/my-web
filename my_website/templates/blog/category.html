@@ -19,7 +19,11 @@
 				<h1 class="text-primary"> {{ cats }} </h1>
 			</div>
 			<div class="col-sm-6">
-				<h4 class="text-primary text-right"> <a href="{% url 'blog:post' %}">Create a new post </a> </h4>
+				<form action="{% url 'blog:post' %}" method="post">
+					{% csrf_token %}
+					<input type="hidden" name="category" value="cats">
+					<h4 class="text-primary text-right"> <a href="{% url 'blog:post' %}">Create a new post </a> </h4>
+				</form>
 			</div>
 		</div>
 		<div class="container-fluid py-2">
@@ -36,7 +40,11 @@
 								<p>Posted by: <a href="{% url 'blog:userprofile' b.poster.username %}" class="text-primary"> {{ b.poster }} </a> </p>
 								<h4> {{ b.title }} </h4>
 								<P>{{ b.content|truncatewords:20 }} </P>
-								<a href="{% url 'blog:login_read_post' b.id %}" class="btn btn-medium btn-primary"> Read more </a>
+								{% if user.is_authenticated %}
+									<a href="{% url 'blog:login_read_post' b.id %}" class="btn btn-medium btn-primary"> Read more </a>
+								{% else %}
+									<a href="{% url 'blog:read_post' b.id %}" class="btn btn-medium btn-primary"> Read more </a>
+								{% endif %}
 							</div>
 							
 						</div>

@@ -1,4 +1,4 @@
-{% extends 'blog/base2.html' %}
+{% extends 'blog/base.html' %}
 <!DOCTYPE html>
 {% load static %}
 <html>
@@ -56,16 +56,16 @@ Blog
                   <div class="card-profile-stats d-flex justify-content-center mt-md-5">
                     <div>
                       <span class="heading">
-                        {{ post.count }}
-                        {{ per.username }}</span>
-                      <span class="description">Friends</span>
+                        {{ per.post.count }}
+                      </span>
+                      <span class="description">Posts</span>
                     </div>
                     <div>
-                      <span class="heading">10</span>
-                      <span class="description">Photos</span>
+                      <span class="heading">{{ per.comment_user.likes.count }}</span>
+                      <span class="description">Likes</span>
                     </div>
                     <div>
-                      <span class="heading">{{ per.comment_uer.comment.count }} 12</span>
+                      <span class="heading">{{ per.comment_user.count }}</span>
                       <span class="description"> Comments </span>
                     </div>
                   </div>

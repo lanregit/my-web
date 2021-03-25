@@ -67,7 +67,4 @@ class Comment_user(models.Model):
     def __str__(self):
         return self.comment
 
-    def count_like(self):
-        return self.likes.count
-
 

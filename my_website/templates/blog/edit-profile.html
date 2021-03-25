@@ -1,4 +1,4 @@
-{% extends 'blog/base2.html' %}
+{% extends 'blog/base.html' %}
 <!DOCTYPE html>
 {% load static %}
 <html>
@@ -102,8 +102,8 @@ Blog
               </div>
             </div>
             <div class="card-body">
-              <form>
-                
+              <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
                 <h6 class="heading-small text-muted mb-4">User information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
@@ -124,7 +124,7 @@ Blog
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">First name: &nbsp; &nbsp;</label>
-                        {{ edit }}
+                        {{ edit.first_name }}
                       </div>
                     </div>
                     <div class="col-lg-6">
@@ -138,13 +138,27 @@ Blog
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-first-name">Gender: &nbsp; &nbsp;</label>
-                        {{ user.completeprofile.gender }}
+                        {{ edit2.gender }}
                       </div>
                     </div>
                     <div class="col-lg-6">
                       <div class="form-group">
                         <label class="form-control-label" for="input-last-name">Phone No: &nbsp; &nbsp;</label>
-                        {{ edit.editprofile.phone }}
+                        {{ edit2.phone }}
+                      </div>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-first-name">Date of Birth: &nbsp; &nbsp;</label>
+                        {{ edit2.dob }}
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <div class="form-group">
+                        <label class="form-control-label" for="input-last-name">Profile picture: &nbsp; &nbsp;</label>
+                        {{ edit2.profile_pic }}
                       </div>
                     </div>
                   </div>
@@ -154,24 +168,10 @@ Blog
                 <h6 class="heading-small text-muted mb-4">Contact information</h6>
                 <div class="pl-lg-4">
                   <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-address">Address: &nbsp; &nbsp;</label>
-                        <input id="input-address" class="form-control form-control-alternative" placeholder="Home Address" value="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09" type="text">
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
                     <div class="col-lg-4">
                       <div class="form-group">
                         <label class="form-control-label" for="input-city">City: &nbsp; &nbsp;</label>
-                        {{ user.completeprofile.location }}
-                      </div>
-                    </div>
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Country</label>
-                        <input type="text" id="input-country" class="form-control form-control-alternative" placeholder="Country" value="United States">
+                        {{ edit2.location }}
                       </div>
                     </div>
                   </div>
@@ -181,11 +181,10 @@ Blog
                 <h6 class="heading-small text-muted mb-4">About me</h6>
                 <div class="pl-lg-4">
                   <div class="form-group">
-                    <label>About Me: &nbsp; &nbsp;</label>
-                    {{ user.completeprofile.bio }}
+                    {{ edit2.bio }}
                   </div>
                 </div>
-                <input type="submit" class="btn btn-primary" value="Edit">
+                <input type="submit" class="btn btn-primary" value="Save">
               </form>
             </div>
           </div>

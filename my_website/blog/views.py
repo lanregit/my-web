@@ -24,8 +24,14 @@ def blog(request):
 def post_read(request, pos_id):
     category = Category.objects.all()
     post = Post.objects.get(id=pos_id)
-    comments = Comment_user.objects.filter(post=post).order_by('comment_time')
-    return render(request, 'blog/read_post.html', {'post':post, 'comments':comments, 'cate':category})
+    comments = Comment_user.objects.filter(post=post, reply=None).order_by('comment_time')
+    context = {
+        'post':post,
+        'comments':comments,
+        'cate':category,
+        'total_likes':post.total_likes()
+    }
+    return render(request, 'blog/read_post.html', context)
 
 # view for login homepage
 @login_required
@@ -41,19 +47,18 @@ def blog_login(request):
 @login_required
 def login_post_read(request, pos_id):
     cat = Category.objects.all()
-    user = request.user
-    comment_user = Comment_user.objects.all()
     post = get_object_or_404(Post, id=pos_id)
     comments = Comment_user.objects.filter(post=post, reply=None)
-    # comment_lk = get_object_or_404(Comment_user, id=request.POST.get(comments))
     #post likes
     is_liked = False
     if post.likes.filter(id=request.user.id).exists():
         is_liked = True
-    #comment likes
-    # liked = False
-    # if comment_lk.likes.filter(id=request.user.id).exists():
-    #     liked = True
+    #comment likes (we used for statement below because; the queryset for comments above will return multiple objects )
+    liked = False
+    for comment_like in comments:
+        if comment_like.likes.filter(id=request.user.id).exists(): 
+            liked =True
+    # user comment
     if request.method == 'POST':
         user_comment = CommentForm(request.POST or None)
         if user_comment.is_valid:
@@ -74,9 +79,7 @@ def login_post_read(request, pos_id):
         'cate':cat,
         'is_liked':is_liked,
         'total_likes':post.total_likes(),
-        # 'comment_lk':comment_lk,
-        # 'liked':liked,
-        # 'total_comment_likes':comment_lk.count_like(),
+        'liked':liked,
     }
     return render(request, 'blog/login_read_post.html', content)
 
@@ -112,16 +115,11 @@ def register(request):
         if sign.is_valid():
             sign.save()
             messages.success(request, 'Your account has been created successfully')
-            return redirect('/lanre_blog/user_profile/')
+            return redirect('blog:log_in')
     else:
         sign = SignUp()
     return render(request, 'blog/signup.html', {'up':sign, 'com':complete})
 
-# view user's profile
-def my_profile(request):
-    my_post = Post.objects.filter(poster = request.user)
-    my_comment = Comment_user.objects.filter(comment_by = request.user)
-    return render(request, 'blog/profile.html', {'prof':request.user, 'post':my_post, 'comment':my_comment})
 
 # view for more user informatiom
 @login_required
@@ -144,14 +142,19 @@ def complete(request):
 #VIEW FOR EDITPROFILE
 @login_required
 def edit_profile(request):
+    user = CompleteUser_Profile.objects.get(user=request.user)
+    # user = get_object_or_404(CompleteUser_Profile, request.user)
     if request.method == 'POST':
         edit = EditProfile(request.POST, request.FILES, instance=request.user)
-        if edit.is_valid():
+        edit2 = CompleteProfileForm(instance=user.completeuser_profile)
+        if edit.is_valid() and edit2.is_valid():
             edit.save()
+            edit2.save()
             return redirect('blog:profile')
     else:
         edit = EditProfile(instance=request.user)
-    return render(request, 'blog/edit-profile.html', {'edit':edit})
+        edit2 = CompleteProfileForm(request.POST or None, request.FILES)
+    return render(request, 'blog/edit-profile.html', {'edit':edit, 'edit2':edit2})
 
 #VIEW FOR USER CREATE POST
 @login_required
@@ -207,10 +210,14 @@ def delete_post(request, id):
         return redirect('blog:blog_l')
     else:
         return Http404('Only the Author of this post can delete it')
+    return render (request, 'blog/deletepost.html', {'post':post})
     
 
-def confirm_post(request):
-    return render (request, 'blog/deletepost.html')
+# view for post delete confirmation page
+@login_required
+def confirm_post(request, id):
+    post = Post.objects.get(id=id)
+    return render (request, 'blog/deletepost.html', {'post':post})
 
 # view for user comment update
 @login_required
@@ -230,10 +237,23 @@ def delete_comment(request, id):
     comment.delete()
     return redirect('blog:login_read_post', comment.post.id)
 
+def confirm_comment(request, id):
+    comment = Comment_user.objects.get(id=id)
+    return render(request, 'blog/deletecomment.html', {'comment':comment})
+
+# view user's profile
+def my_profile(request):
+    my_post = Post.objects.filter(poster = request.user) #| Post.objects.filter(likes = request.user.id)
+    my_comment = Comment_user.objects.filter(comment_by = request.user)
+    like = Comment_user.objects.filter(likes = request.user.id)
+    context = {'prof':request.user, 'post':my_post, 'comment':my_comment, 'like':like}
+    return render(request, 'blog/profile.html', context )
+
+    
 # view for to each user profile
 def userprofile (request, username):
     person = get_object_or_404(User, username=username)
-    # my_post = Post.objects.filter(poster_id=username)
+    # my_post = Post.objects.filter(poster=username)
     context = {'per':person,}
     return render(request, 'blog/userprofile.html', context)       
 

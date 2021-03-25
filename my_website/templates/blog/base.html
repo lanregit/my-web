@@ -8,9 +8,10 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" type="text/css" href="{% static 'blog/css/bootstrap.min.css' %}">
-	<link href="{% static 'blog/img/brand/favicon.png' %}" rel="icon" type="image/png">
+	<link href="{% static 'blog/img/brand/icon.png' %}" rel="icon" type="image/png">
 	<!-- Fonts -->
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
+	<link rel="stylesheet" href="{% static 'blog/fonts/icomoon/style.css' %}">
 	<!-- Icons -->
 	<link href="{% static 'blog/js/plugins/nucleo/css/nucleo.css' %}" rel="stylesheet" />
 	<link href="{% static 'blog/js/plugins/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
@@ -25,6 +26,80 @@
 </head>
 <body>
 	<!-- this is the header -->
+	{% if user.is_authenticated %}
+	<div class="container-fluid bg-dark sticky-top">
+		<div class="row">
+			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+	  <!-- LOGO -->
+	  <div class="col-sm-4">
+		<a href="{% url 'home' %}" class="navbar-brand"><img src="{% static 'blog/images/mmmm.png' %}" width="30%" height="50%" alt="logo"> </a>
+	  </div>
+	  <div class="col-sm-3 offset-1">
+		<!-- SEARCH FORM -->
+		<form action="" method="get" class="form-inline">
+						<input type="text" class="form-control mr-sm-2" placeholder="Search">
+						<input type="submit" class="btn btn-small btn-success" value="Search">
+		</form>
+	  </div>
+		<!-- SUB NAV -->
+	  <div class="col-sm-2">
+		  <ul class="nav justify-content-end">
+			<li class="nav-item">
+			  <a href="{% url 'home' %}" class="nav-link text-light">Home</a>
+			</li>
+			<li class="nav-item">
+			  <a href="{% url 'blog:blog_l' %}" class="nav-link text-light">Blog</a>
+			</li>
+		  </ul>
+	  </div>
+	  <div class="col-sm-2">
+		<div class="status pull-right">
+		  <div class="userStatus">
+			<a class="userStatus dropdown-toggle nav-link" data-toggle="dropdown" id="userStatus">
+			  <img src="{{ user.completeuser_profile.profile_pic.url }}" class="rounded-circle">
+			  {{ user.username }}
+			  <!-- <span class="caret"></span> -->
+			</a>
+			<ul class="dropdown-menu dropdown-menu-arrow">
+			  <li>
+				<a href="{% url 'blog:profile' %}" class="dropdown-item">
+				  <i class="ni ni-single-02"></i>
+				  <span>My profile</span>
+				</a>
+			  </li>
+			  <li>
+				<a href="{% url 'blog:c_profile' %}" class="dropdown-item">
+				  <i class="ni ni-settings-gear-65"></i>
+				  <span>Settings</span>
+				</a>
+			  </li>
+			  <li>
+				<a href="./examples/profile.html" class="dropdown-item">
+				 <i class="ni ni-calendar-grid-58"></i>
+				 <span>Activity</span>
+				</a>
+			  </li>
+			  <li>
+				<a href="{% url 'blog:post' %}" class="dropdown-item">
+				 <i class="ni ni-ruler-pencil"></i>
+				 <span>Create Post</span>
+				</a>
+			  </li>
+			  <li>
+				<div class="dropdown-divider"></div>
+				<a href="{% url 'blog:logout' %}" class="dropdown-item">
+				 <i class="ni ni-user-run"></i>
+				 <span>Logout</span>
+				</a>
+			  </li>
+			</ul>
+		  </div>
+		</div>
+	  </div>
+			</nav>
+		</div>
+	</div>
+	{% else %}
 	<div class="container-fluid bg-dark sticky-top">
 		<div class="row">
 			<nav class="navbar navbar-expand-sm navbar-dark">
@@ -114,6 +189,7 @@
 			</nav>
 		</div>
 	</div>
+	{% endif %}
     <!-- header ends here -->
     {% block content %}
     
@@ -152,6 +228,18 @@
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script type="text/javascript" src="{% static 'blog/js/jquery-3.3.1.slim.min.js' %}"></script>
     <script type="text/javascript" src="{% static 'blog/js/popper.min.js' %}"></script>
-    <script type="text/javascript" src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'blog/js/bootstrap.min.js' %}"></script>
+	<script type="text/javascript" src="{% static 'blog/js/jquery.js' %}"></script>
+	<script type="text/javascript">
+		$(function(){
+	  
+		  $('.reply-btn').click(function(){
+			  $(this).parent().next('.reply').fadeToggle();
+			})
+  
+		  
+  
+		})
+	  </script>
 </body>
 </html>

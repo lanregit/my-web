@@ -1,4 +1,4 @@
-{% extends 'blog/base2.html' %}
+{% extends 'blog/base.html' %}
 <!DOCTYPE html>
 {% load static %}
 <html>
@@ -25,7 +25,7 @@ Blog
           <div class="col-lg-7 col-md-10">
             <h1 class="display-2 text-white">Hello {{ user.username }}</h1>
             <p class="text-white mt-0 mb-5">This is your profile page. You can see the progress you've made with your work and manage your projects or assigned tasks</p>
-            <a href="#!" class="btn btn-info">Edit profile</a>
+            <a href="{% url 'blog:c_profile' %}" class="btn btn-info">Edit profile</a>
           </div>
         </div>
       </div>
@@ -59,9 +59,13 @@ Blog
                       <span class="description"> <a href="#"> Posts </a> </span>
                     </div>
                     <div>
-                      <span class="heading">10</span>
-                      <span class="description">Likes</span>
+                      <span class="heading"> {{ like.count }}</span>
+                      <span class="description"><a href="#"> Likes </a></span>
                     </div>
+                    <!-- <div>
+                      <span class="heading">{{ comment.count }}</span>
+                      <span class="description"> <a href="#"> Comments </a> </span>
+                    </div> -->
                     <div>
                       <span class="heading">{{ comment.count }}</span>
                       <span class="description"> <a href="#"> Comments </a> </span>
@@ -166,6 +170,7 @@ Blog
                     {{ user.completeuser_profile.bio|linebreaks |capfirst }}
                   </div>
                 </div>
+                <a href="{% url 'blog:edit_profile' %}" class="btn btn-info">Edit</a>
                 <input type="submit" class="btn btn-primary" value="Edit">
               </form>
             </div>

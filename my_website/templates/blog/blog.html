@@ -34,7 +34,7 @@ Blog
 								</p>
 								<h4> {{ b.title }} </h4>
 								<P>{{ b.content|truncatewords:20 }} </P>
-								<a href="{% url 'blog:login_read_post' b.id %}" class="btn btn-medium btn-primary"> Read more </a>
+								<a href="{% url 'blog:read_post' b.id %}" class="btn btn-medium btn-primary"> Read more </a>
 							</div>
 							
 						</div>

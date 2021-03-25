@@ -21,11 +21,12 @@ urlpatterns = [
     path('category/<cats>/', views.category, name='category'),
     path('<int:id>/update/', views.updatepost, name='updatepost'),    
     path('post/<int:id>/delete/', views.delete_post, name='deletepost'),    
-    path('post/delete/', views.confirm_post, name='confirmpost'),    
+    path('post/delete/<int:id>/confirm', views.confirm_post, name='confirmpost'),    
     path('profile/<username>/', views.userprofile, name='userprofile'),
     path('likes/', views.like_post, name='likes'),
     path('comment_likes/', views.comment_like, name='comment_like'),
     path('update_comment/<int:id>', views.updatecomment, name='update_c'),
-    path('delete_comment/<int:id>', views.delete_comment, name='delete_c')
+    path('delete_comment/<int:id>', views.delete_comment, name='delete_c'),
+    path('comment/<int:id>/delete', views.confirm_comment, name='confirm_delete_c'),
 
 ]

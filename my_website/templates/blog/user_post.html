@@ -1,4 +1,4 @@
-{% extends 'blog/base2.html' %}
+{% extends 'blog/base.html' %}
 {% load static %}
 <!Doctype html>
 {% block title %}
@@ -13,7 +13,7 @@ Create a post
     <div class="col-sm-9" id="mainContent">
       <div class="row">
         <div class="col-sm-12">
-         <div class="row">
+         <div class="row my-5">
              <div class="col-sm-12">
                 <h2 class="text-center m-5">Post Form </h2>
 
@@ -32,7 +32,8 @@ Create a post
                   </div>
                   
                     {% csrf_token %}
-                    <input type="submit" class='btn btn-success' value="Submit">
+                    <button type="button" onclick="history.back()" class="btn btn-sm btn-primary">Back</button>
+                    <input type="submit" class='btn btn-success btn-sm' value="Submit">
                 </form>
                
                

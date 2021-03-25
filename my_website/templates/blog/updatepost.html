@@ -1,4 +1,4 @@
-{% extends 'blog/base2.html' %}
+{% extends 'blog/base.html' %}
 {% load static %}
 <!Doctype html>
 {% block title %}
@@ -11,7 +11,7 @@ Create a post
   <div class="container">
   <div class="row">
     <div class="col-sm-9" id="mainContent">
-      <div class="row">
+      <div class="row my-5">
         <div class="col-sm-12">
          <div class="row">
              <div class="col-sm-12">
@@ -30,7 +30,8 @@ Create a post
                     {{ form.img }}
                   </div>
                     {% csrf_token %}
-                    <input type="submit" class='btn btn-success' value="Update">
+                    <button type="button" onclick="history.back()" class="btn btn-sm btn-primary">Cancle</button>
+                    <input type="submit" class='btn btn-success btn-sm' value="Update">
                 </form>
              </div>
          </div>

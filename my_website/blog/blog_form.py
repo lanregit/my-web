@@ -64,7 +64,7 @@ class EditProfile(UserChangeForm):
     class Meta:
         model = User
         fields = ['first_name', 'last_name']
-        exclude = ('username', 'email')
+        exclude = ('username', 'email', 'password')
         widgets = {
             'first_name':forms.TimeInput(attrs={'class':'form-control', 'placeholder':'First Name'}),
             'last_name' : forms.TextInput(attrs={'class':'form-control', 'placeholder':'Last Name'})
@@ -116,13 +116,5 @@ class CommentForm(forms.ModelForm):
             'comment':forms.Textarea(attrs={'class':'form-control', 'placeholder':' Write Your Comment'})
         }
 
-# USERS' REPLY FORM
-# class ReplyForm(forms.ModelForm):
-#     class Meta:
-#         model = Reply
-#         fields ={'reply',}
-#         exclude = ('reply_time',)
-#         widgets = {
-#             'reply':forms.Textarea(attrs={'class':'form-control', 'placeholder':' Write Your Comment'})
-#         }
+
 
