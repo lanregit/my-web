@@ -34,7 +34,7 @@ def post_read(request, pos_id):
     return render(request, 'blog/read_post.html', context)
 
 # view for login homepage
-@login_required
+# @login_required
 def blog_login(request):
     category = Category.objects.all()
     blog_post = Post.objects.all().order_by('-time')
@@ -44,7 +44,7 @@ def blog_login(request):
 # view for read_more (login) page
     
 
-@login_required
+# @login_required
 def login_post_read(request, pos_id):
     cat = Category.objects.all()
     post = get_object_or_404(Post, id=pos_id)

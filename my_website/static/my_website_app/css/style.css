@@ -835,8 +835,8 @@ h1, h2, h3, h4, h5, h6 {
 
 #sphere {
   position: relative;
-  height: 400px;
-  width: 400px;
+  height: auto;
+  width: auto;
   background-color: #000;
 }
 

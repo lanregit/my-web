@@ -146,7 +146,7 @@ EMAIL_HOST_USER = 'lanre2010k@gmail.com'
 EMAIL_HOST_PASSWORD = 'LAnreyahoo'
 
 LOGIN_REDIRECT_URL = 'blog:blog_l'
-LOGOUT_REDIRECT_URL= 'blog:blog2'
+LOGOUT_REDIRECT_URL= 'blog:blog_l'
 
 
 # from django.conf import settings

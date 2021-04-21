@@ -20755,5 +20755,11 @@ footer{
   margin-right: 50px !important;
 }
 
+.navbar-brand{
+  width: 150px;
+  height: 30px;
+  background: url(../images/mmmm.png);
+  background-size: 150px;
+}
 
 /*# sourceMappingURL=dashboard-free.css.map */

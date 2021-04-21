@@ -15,7 +15,9 @@
 	<section class="section2">
 		<div class="container-fluid py-2">
 			<div class="">
+				{% if user.is_authenticated %}
 				<p><a href="{% url 'blog:post' %}">Create Post</a></p>
+				{% endif %}
 				<div class="row">
 					<div class="col-sm-8">
 						{% if post %}

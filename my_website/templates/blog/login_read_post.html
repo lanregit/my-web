@@ -38,23 +38,35 @@ Post Detail
 							</div>
 							<div class="row">
 								<div class="col-sm-12 mx-4">
+									{% if user.is_authenticated %}
 									<form action="{% url 'blog:likes' %}" method="post">
 										{% csrf_token %}
+										{% if total_likes == 0 %}
+										<button type='submit' name='post_id' value='{{ post.id }}' class="btn btn-sm"> <span class="icon-heart -4x"> </span></button>
+										{% else %}
 										{% if is_liked %}
 										<button type='submit' name='post_id' value='{{ post.id }}' class="btn btn-sm text-primary"> {{ total_likes }} <span class="icon-heart -4x"></span></button>
 										{% else %}
 										<button type='submit' name='post_id' value='{{ post.id }}' class="btn btn-sm"> {{ total_likes }} <span class="icon-heart"></span></button>
 										{% endif %}
+										{% endif %}
 									</form>
-									{% if request.user == post.poster %}
+										{% if request.user == post.poster %}
 										<a href="{% url 'blog:updatepost' post.id %}" class="btn btn-sm">  (Edit) </a>
 										<form action="{% url 'blog:confirmpost' post.id %}" method="post" style="display: inline;">
 											{% csrf_token %}
 											<input type="hidden" name="id" value="{{ post.id }}">
 											<input type="submit"  value='Delete' class="btn btn-sm">
 										</form>
-									{% endif %}
+										{% endif %}
 									<!-- <a href="{% url 'blog:deletepost' post.id %}" class="btn btn-sm">(Delete)</a> -->
+									{% else %}
+										{% if total_likes == 0 %}
+										<span class="btn-sm"> <span class="icon-heart"></span></span>
+										{% else %}
+										<span class="btn-sm"> {{ total_likes }} <span class="icon-heart"></span></span>
+										{% endif %}
+									{% endif %}
 								</div>
 							</div>
 						</div>
@@ -64,7 +76,7 @@ Post Detail
 								<h2 class="text-primary pt-3"> {{ comment.count }} Comment{{ comment|pluralize }}</h2>
 							</div>
 						</div>
-						
+						{% if user.is_authenticated %}
 						{% for c in comment %}	
 						<div class="container-fluid">
 							<div class="row story news comment my-3">
@@ -158,6 +170,75 @@ Post Detail
 							{{ comment_form.comment }} <br>
 							<input type="submit" value="Comment" class="text-center btn btn-primary btn-sm">
 						</form>
+						{% else %}
+						{% for c in comment %}	
+						<div class="container-fluid">
+							<div class="row story news comment my-3">
+								<div class="col-sm-6 bg-info">
+									<p>by: <a href="{% url 'blog:userprofile' c.comment_by.username %}">{{ c.comment_by }} </a></p>
+								</div>
+								<div class="col-sm-6 bg-info text-right">
+									<small> {{ c.comment_time|timesince }} </small>
+								</div>
+								<div class="col-sm-12 text-justify">
+									{{ c.comment|capfirst |linebreaks }}
+								</div>
+								
+									{% csrf_token %}
+									{% if c.likes.count == 0 %}
+									<span class="btn-sm"> <span class="icon-thumbs-up"></span></span>
+									{% else %}
+									<span class="btn-sm"> {{ c.likes.count }}  <span class="icon-thumbs-up"></span></span>
+									{% endif %}
+							
+								{% if c.replies.count == 0 %}
+								<span class="btn-sm replyn" id=""> <span class="icon-comment"></span></span>
+								{% else %}
+								<span class="btn-sm reply-btn" id="reply-btn">{{ c.replies.count }} <span class="icon-comment"></span></span>
+								{% endif %}
+							</div>
+							<div class="reply" style="display: none;">
+								{% for reply in c.replies.all %}
+								<div class="container mx-2 reply2 my-2" id="reply">
+										<div class="row px-3">
+											<div class="col-sm-6 bg-dark">
+												Replied by: <a href="{% url 'blog:userprofile' reply.comment_by.username %}">{{ reply.comment_by }}</a>
+											</div>
+											<div class="col-sm-6 bg-dark text-right">
+												<small> {{ reply.comment_time }} time</small>
+											</div>
+											<div class="row p-3">
+												<div class="col-sm-12 text-justify mt-2">
+														<p>{{ reply.comment|capfirst |linebreaks }}</p>
+												</div>
+												
+													{% csrf_token %}
+													{% if reply.likes.count == 0 %}
+													<button type='submit' name='user_id' value='{{ reply.id }}' class="btn btn-sm"> <span class="icon-thumbs-up"></span></button>
+													{% else %}
+													{% if liked %}			
+													<button type='submit' name='user_id' value='{{ reply.id }}' class="btn btn-sm text-primary"> {{ reply.likes.count }} <span class="icon-thumbs-up"></span></button>
+													{% else %}
+													<button type='submit' name='user_id' value='{{ reply.id }}' class="btn btn-sm"> {{ reply.likes.count }}  <span class="icon-thumbs-up"></span></button>
+													{% endif %}
+													{% endif %}
+												
+												{% if request.user == reply.comment_by %}
+												<form action="{% url 'blog:confirm_delete_c' reply.id %}" method="post">
+													{% csrf_token %}
+													<input type="hidden" name="id2" value="{{ reply.id }}">
+													<input type="submit"  value='Delete' class="btn btn-sm">
+												</form>
+												<a href="{% url 'blog:update_c' reply.id %}" class="btn btn-sm">(Edit)</a><br>
+												{% endif %}
+											</div>
+										</div>
+									</div>
+									{% endfor %}<br>
+							</div>
+						</div>
+						{% endfor  %}
+						{% endif %}
 
 					</div>
 					

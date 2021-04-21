@@ -1,6 +1,7 @@
 from django.urls import path
 from blog import views
 from django.contrib.auth import views as auth_views
+from django.contrib.auth.views import LogoutView
 
 app_name = 'blog'
 
@@ -12,7 +13,7 @@ urlpatterns = [
     path('login/', auth_views.LoginView.as_view(template_name='blog/login.html'), name='log_in'),
     path('user-login/', views.blog_login, name='blog_l'),
     path('read/<int:pos_id>/', views.login_post_read, name='login_read_post'),
-    path('', auth_views.LogoutView.as_view, name='logout'),
+    path('logout', LogoutView.as_view(), name='logout'),
     path('my_profile/', views.my_profile, name='profile'),
     path('edit-profile/', views.edit_profile, name='edit_profile'),
     path('user_profile/', views.complete, name='complete'),

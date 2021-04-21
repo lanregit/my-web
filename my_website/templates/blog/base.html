@@ -13,8 +13,8 @@
 	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700" rel="stylesheet">
 	<link rel="stylesheet" href="{% static 'blog/fonts/icomoon/style.css' %}">
 	<!-- Icons -->
-	<link href="{% static 'blog/js/plugins/nucleo/css/nucleo.css' %}" rel="stylesheet" />
-	<link href="{% static 'blog/js/plugins/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
+	<link href="{% static 'blog/css/nucleo/css/nucleo.css' %}" rel="stylesheet" />
+	<link href="{% static 'blog/css/@fortawesome/fontawesome-free/css/all.min.css' %}" rel="stylesheet" />
 	<!-- CSS Files -->
 	<link href="{% static 'blog/css/argon-dashboard.css' %}" rel="stylesheet" />
 	<link rel="stylesheet" type="text/css" href="{% static 'blog/css/blog.css' %}">
@@ -26,114 +26,94 @@
 </head>
 <body>
 	<!-- this is the header -->
-	{% if user.is_authenticated %}
 	<div class="container-fluid bg-dark sticky-top">
-		<div class="row">
-			<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
-	  <!-- LOGO -->
-	  		<div class="col-sm-4">
-				<a href="{% url 'home' %}" class="navbar-brand"><img src="{% static 'blog/images/mmmm.png' %}" width="30%" height="50%" alt="logo"> </a>
-			</div>
-	  		<div class="col-sm-3 offset-1">
-		<!-- SEARCH FORM -->
-			<form action="" method="get" class="form-inline">
-						<input type="text" class="form-control mr-sm-2" placeholder="Search">
-						<input type="submit" class="btn btn-small btn-success" value="Search">
-			</form>
-	  
-		<!-- SUB NAV -->
-	  		<div class="col-sm-2">
-		  		<ul class="nav justify-content-end">
+		{% if user.is_authenticated %}
+		<nav class="navbar navbar-expand-sm bg-dark navbar-dark sticky-top">
+			<a href="{% url 'home' %}" class="navbar-brand"> </a>
+
+			<button class="navbar-toggler" data-toggle="collapse" data-target="#menu" type="button" aria-controls="menu" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse justify-content-end" role="navigation" id="menu">
+				<ul class="navbar-nav">
 					<li class="nav-item">
-			  			<a href="{% url 'home' %}" class="nav-link text-light">Home</a>
+						<a href="{% url 'home' %}" class="nav-link text-light">Home</a>
 					</li>
 					<li class="nav-item">
-			  			<a href="{% url 'blog:blog_l' %}" class="nav-link text-light">Blog</a>
+						<a href="{% url 'blog:blog_l' %}" class="nav-link text-light">Blog</a>
 					</li>
-		  		</ul>
+					<li class="status pull-right nav-item dropdown">
+						<div class="userStatus">
+							<a class="userStatus dropdown-toggle nav-link" data-toggle="dropdown" id="userStatus">
+								<img src="{{ user.completeuser_profile.profile_pic.url }}" class="rounded-circle">
+								{{ user.username }}
+								<span class="caret"></span>
+							</a>
+							<ul class="dropdown-menu dropdown-menu-arrow">
+								<li>
+									<a href="{% url 'blog:profile' %}" class="dropdown-item">
+										<i class="ni ni-single-02"></i>
+										<span>My profile</span>
+									</a>
+								</li>
+								<li>
+									<a href="{% url 'blog:c_profile' %}" class="dropdown-item">
+										<i class="ni ni-settings-gear-65"></i>
+										<span>Settings</span>
+									</a>
+								</li>
+								<li>
+									<a href="./examples/profile.html" class="dropdown-item">
+										<i class="ni ni-calendar-grid-58"></i>
+										<span>Activity</span>
+									</a>
+								</li>
+								<li>
+									<a href="{% url 'blog:post' %}" class="dropdown-item">
+										<i class="ni ni-ruler-pencil"></i>
+										<span>Create Post</span>
+									</a>
+								</li>
+								<li>
+									<div class="dropdown-divider"></div>
+									<a href="{% url 'blog:logout' %}" class="dropdown-item">
+										<i class="ni ni-user-run"></i>
+										<span>Logout</span>
+									</a>
+								</li>
+							</ul>
+						</div>
+					</li>
+				</ul>
 	  		</div>
-	  		<div class="col-sm-2">
-				<div class="status pull-right">
-		  		<div class="userStatus">
-					<a class="userStatus dropdown-toggle nav-link" data-toggle="dropdown" id="userStatus">
-			  			<img src="{{ user.completeuser_profile.profile_pic.url }}" class="rounded-circle">
-			  			{{ user.username }}
-			  			<!-- <span class="caret"></span> -->
-					</a>
-				<ul class="dropdown-menu dropdown-menu-arrow">
-			  <li>
-				<a href="{% url 'blog:profile' %}" class="dropdown-item">
-				  <i class="ni ni-single-02"></i>
-				  <span>My profile</span>
-				</a>
-			  </li>
-			  <li>
-				<a href="{% url 'blog:c_profile' %}" class="dropdown-item">
-				  <i class="ni ni-settings-gear-65"></i>
-				  <span>Settings</span>
-				</a>
-			  </li>
-			  <li>
-				<a href="./examples/profile.html" class="dropdown-item">
-				 <i class="ni ni-calendar-grid-58"></i>
-				 <span>Activity</span>
-				</a>
-			  </li>
-			  <li>
-				<a href="{% url 'blog:post' %}" class="dropdown-item">
-				 <i class="ni ni-ruler-pencil"></i>
-				 <span>Create Post</span>
-				</a>
-			  </li>
-			  <li>
-				<div class="dropdown-divider"></div>
-				<a href="{% url 'blog:logout' %}" class="dropdown-item">
-				 <i class="ni ni-user-run"></i>
-				 <span>Logout</span>
-				</a>
-			  </li>
-			</ul>
-		  </div>
-		</div>
-	  </div>
-			</nav>
-		</div>
-	</div>
-	{% else %}
-	<div class="container-fluid bg-dark sticky-top">
-		<div class="row align-items-center">
-			<nav class="navbar navbar-expand-sm navbar-dark">
-				<!-- LOGO -->
-				<div class="">
-					<a href="{% url 'home' %}" class="navbar-brand"><img src="{% static 'blog/images/mmmm.png' %}" width="30%" height="50%" alt="logo"> </a>
-				</div>
-
-				<!-- SEARCH FORM -->
-				<!-- <div class="col-sm-3">
-					<form action="" method="get" class="form-inline">
-						<input type="text" class="form-control mr-sm-2" placeholder="Search">
-						<input type="submit" class="btn btn-small btn-success" value="submit">
-					</form>
-				</div> -->
-
-				<!-- TOGGLEABLE MENU -->
-				<button class="navbar-toggler" data-toggle="collapse" data-target="#menu" type="button" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
-					<span class="navbar-toggler-icon"></span>
-				</button>
-				
+		</nav>
+		{% else %}
+		<nav class="navbar navbar-expand-sm navbar-dark bg-dark sticky-top">
+			<!-- LOGO -->
+			<a href="{% url 'home' %}" class="navbar-brand"> </a>
 			
-				
-					<div class="text-right collapse navbar-collapse justify-content-end" id="menu">
-						<ul class="nav navbar-nav">
-							<li class="nav-item"> <a href="{% url 'home' %}" class="nav-link"> Home </a></li>
-							<li class="nav-item"> <a href="{% url 'blog:blog2' %}" class="nav-link">Blog</a></li>
-							<li class="nav-item"> <a href="{% url 'blog:log_in' %}" class="nav-link"> Login </a></li>
-							<li class="nav-item"> <a href="{% url 'blog:register' %}" class="nav-link"> Sign Up</a></li>
-						</ul>
-					</div>
-			</nav>
-		</div>
+			
+			<!-- TOGGLEABLE MENU -->
+			<!-- <button class="navbar-toggler" data-toggle="collapse" data-target="#menu" type="button" aria-controls="sidenav-main" aria-expanded="true" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button> -->
+			
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			
+			<div class="collapse navbar-collapse justify-content-end" role="navigation" id="collapsibleNavbar">
+				<ul class="navbar-nav">
+					<li class="nav-item"> <a href="{% url 'home' %}" class="nav-link"> Home </a></li>
+					<li class="nav-item"> <a href="{% url 'blog:blog2' %}" class="nav-link">Blog</a></li>
+					<li class="nav-item"> <a href="{% url 'blog:log_in' %}" class="nav-link"> Login </a></li>
+					<li class="nav-item"> <a href="{% url 'blog:register' %}" class="nav-link"> Sign Up</a></li>
+				</ul>
+			</div>
+		</nav>
 	</div>
+		
+
 	{% endif %}
     <!-- header ends here -->
     {% block content %}
